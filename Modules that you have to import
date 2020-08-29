@@ -1,0 +1,29 @@
+1-)Install  wikipedia 
+'pip install wikipedia' #Open up your command prompt(cmd) or terminal and type this
+Warning!:
+If 'pip install wikipedia' does not work just type 'python -m pip install wikipedia'   #definitely works
+2-) Install SpeechRecognition 
+'pip install SpeechRecognition'   #Open up your command prompt(cmd) or terminal and type this
+Warning!:
+If 'pip install SpeechRecognition' does not work just type 'python -m pip install SpeechRecognition'   #definitely works
+3-) Install pyttsx3
+'pip install pyttsx3'    #Open up your command prompt(cmd) or terminal and type this
+Warning!:
+If 'pip install pyttsx3' does not work just type 'python -m pip install pyttsx3'   #definitely works
+4-) Install DateTime
+'pip install DateTime' #Open up your command prompt(cmd) or terminal and type this
+Warning!:
+If 'pip install DateTime' does not work just type 'python -m pip install DateTime'   #definitely works
+5-)Install Webbrowser
+# You can search it in google to download it 
+6-)Install os 
+# You can search it in google to download it
+7-)Install smtplib
+# You can search it in google to download it
+
+
+
+
+#I hope this will work for you:)
+#Thanks
+
