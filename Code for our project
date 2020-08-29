@@ -1,0 +1,135 @@
+import pyttsx3
+import speech_recognition as sr
+import wikipedia
+import datetime
+import webbrowser
+import os
+import smtplib
+
+
+engine=pyttsx3.init('sapi5')
+voices=engine.getProperty('voices')
+
+engine.setProperty('voice',voices[0].id)
+
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+
+def wishMe():
+    hour=int(datetime.datetime.now().hour)
+    if hour>= 0 and hour<=12:
+        speak("Good morning mad'am!")
+    else:
+        speak("Welcome back mad'am!")
+
+    speak("How can I help you mad'am?")
+
+def sendEmail(to, content):
+    server = smtplib.SMTP('smtp.gmail.com',587)
+    server.ehlo()
+    server.starttls()
+    server.login('aynurjumageldi@gmail.com','aynur2006')
+    server.sendmail('mt7davutpasa@gmail.com', to, content)
+    server.close()
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print('Listening...')
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        print('Recognizing...')
+        query= r.recognize_google(audio,language='en-tr')
+        print(f'You said: {query}\n')
+
+    except Exception as e:
+        print(e)
+        print('Sorry,Please say that again...')
+        return 'None'
+    return query
+
+
+if  __name__ == '__main__':
+    wishMe()
+    while True:
+        query= takeCommand().lower()
+
+        if 'wikipedia' in query:
+            speak('Searching wikipedia')
+            query = query.replace('wikipedia','')
+            results = wikipedia.summary(query,sentences=2)
+            speak('According to the wikipedia')
+            print(results)
+            speak(results)
+
+
+        if 'open youtube' in query:
+            webbrowser.open('https://www.youtube.com/')
+
+        elif 'open gmail' in query:
+            webbrowser.open('https://www.gmail.com/')
+
+        elif 'open pinterest' in query:
+            webbrowser.open('https://www.pinterest.com/')
+
+        elif 'what is the time' in query:
+            strTime = datetime.datetime.now().strftime('%H:%M:%S')
+            speak(f"Mad'am the time is {strTime}")
+
+        elif 'open instagram' in query:
+            webbrowser.open('https://www.instagram.com/')
+
+        elif 'thanks' in query:
+            speak("You are welcome mad'am")
+
+        elif 'play music' in query:
+            music_dir = 'C:\\Users\\Toshiba\\Desktop\\my musics'
+            songs = os.listdir(music_dir)
+            print(songs)
+            os.startfile(os.path.join(music_dir,songs[4]))
+        elif 'play video' in query:
+            video_dir = 'C:\\Users\\Toshiba\\Desktop\\My videos'
+            videos = os.listdir(video_dir)
+            print(videos)
+            os.startfile(os.path.join(video_dir,videos[2]))
+        elif 'stop video' in query:
+            video_dir
+
+        elif 'open illustrator' in query:
+            codepath = 'C:\\Program Files\\Adobe\\Adobe Illustrator CC 2018\\Support Files\\Contents\\Windows\\Illustrator.exe'
+            os.startfile(codepath)
+
+        elif 'open firefox' in query:
+            codepath = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+            os.startfile(codepath)
+
+        elif 'open code' in query:
+            codepath = "C:\\Program Files\\JetBrains\\PyCharm 2020.1\\bin\\pycharm64.exe"
+            os.startfile(codepath)
+
+        elif 'open stack overflow' in query:
+            webbrowser.open('https://www.stackoverflow.com/')
+
+        elif 'open o' in query:
+            codepath = 'C:\\Users\\Toshiba\\AppData\\Local\\Programs\\Opera\\launcher.exe'
+            os.startfile(codepath)
+
+        elif 'how are you' in query:
+            speak("I am fine mad'am")
+
+        elif 'jarvis are you here' in query:
+            speak('Yes.I am here')
+
+        elif 'send email' in query.lower():
+            try:
+                speak('What should I sent')
+                content = takeCommand()
+                to = 'resulvlnzr@gmail.com'
+                sendEmail(to, content)
+                speak('Email has sended')
+            except Exception as e:
+                print(e)
